@@ -1,5 +1,14 @@
-var soldColor = "#b6d7a8";
+// Add your own Discogs API key here:
+var discogsToken = "blabla";
+
+// Edit these two to change row background
+// color according to the listing's status
+var soldColor    = "#b6d7a8";
 var sellingColor = "#ffffff";
+
+// Add your USPS user here if you want to
+// use that functionality
+var trackingUser = "SOMEUSER";
 
 function getRecords() {
  return SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Records")
@@ -15,8 +24,6 @@ function setColor(row,color) {
   var range = sheet.getRange(row,2,1,1000);
   range.setBackground(color);
 }
-
-var discogsToken = "blabla";
 
 function makeUrl(path) {
   return "https://api.discogs.com" + path + "?token=" + discogsToken;
@@ -288,8 +295,6 @@ function syncDiscogsListings() {
     syncDiscogsListing(sheet,header,index);
   }
 }
-
-var trackingUser = "SOMEUSER";
 
 function updateTracking(sheet, header, row) {
   var trackingIDIndex = header.indexOf("Tracking ID");
